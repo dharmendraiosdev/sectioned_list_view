@@ -14,7 +14,7 @@ class FlutterSectionListView extends StatefulWidget {
     this.sectionWidget,
     @required this.rowWidget,
   }) : assert(!(numberOfRowsInSection == null || rowWidget == null),
-  'numberOfRowsInSection and rowWidget are mandatory');
+            'numberOfRowsInSection and rowWidget are mandatory');
 
   /// ----#3
   /// Defines the total number of sections
@@ -39,17 +39,17 @@ class _FlutterSectionListViewState extends State<FlutterSectionListView> {
   int itemCount = 0;
   int sectionCount = 0;
 
-  /// ----#4
   @override
   void initState() {
-    /// ----#4-a
+    /// ----#4
     sectionCount = widget.numberOfSection();
-    /// ----#4-b
+
+    /// ----#5
     itemCount = listItemCount();
     super.initState();
   }
 
-  /// ----#5
+  /// ----#6
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -77,20 +77,21 @@ class _FlutterSectionListViewState extends State<FlutterSectionListView> {
     return rowCount;
   }
 
-  /// ----#6
+  /// ----#7
   /// Get the widget for each item in list
   Widget buildItemWidget(int index) {
-    /// ----#6-a
+    /// ----#8
     IndexPath indexPath = sectionModel(index);
 
-    /// ----#6-b-c
+    /// ----#9
     /// If the row number is -1 of any indexPath it will represent a section else row
     if (indexPath.row < 0) {
+      /// ----#10
       return widget.sectionWidget != null
           ? widget.sectionWidget(indexPath.section)
           : SizedBox(
-        height: 0,
-      );
+              height: 0,
+            );
     } else {
       return widget.rowWidget(indexPath.section, indexPath.row);
     }
